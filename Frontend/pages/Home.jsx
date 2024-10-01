@@ -36,12 +36,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Today's Special */}
-      <section>
-        <h2>Today's Special</h2>
-        <p>Try our chef's special: Grilled Salmon with Lemon Butter Sauce!</p>
-      </section>
-
       {/* Featured Rooms */}
       <section>
         <h2>Our Rooms</h2>
@@ -53,6 +47,7 @@ const Home = () => {
           </Link>
         </div>
       </section>
+
       {/* private dinning section */}
       <section>
         <h2>Private Dinning</h2>
@@ -69,16 +64,15 @@ const Home = () => {
         </div>
       </section>
 
+      {/* gallery */}
+      <section>
+        <h2>Gallery</h2>
+      </section>
+
       {/* Testimonials */}
       <section>
         <h2>What Our Guests Say</h2>
         <blockquote>"Amazing experience with excellent service!"</blockquote>
-      </section>
-
-      {/* Contact Info */}
-      <section>
-        <h2>Contact Us</h2>
-        <p>Email: contact@resortname.com | Phone: (123) 456-7890</p>
       </section>
     </div>
   );

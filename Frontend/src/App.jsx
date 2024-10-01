@@ -8,6 +8,7 @@ import Navigation from "../components/navigation/Navigation";
 import Footer from "../pages/Footer";
 import Booking from "../pages/Booking";
 import Room from "../pages/Room";
+import Login from "../pages/Login";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="/private-events" element={<PrivateEvent />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/booking" element={<Booking />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
 
       <Footer />
