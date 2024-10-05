@@ -13,11 +13,15 @@ const PrivateEvent = () => {
   };
   return (
     <>
-      <div>
-        <h1>BOOK AN EVENT</h1>
+      <div className="form-container">
+        <h1 className="h1">BOOK AN EVENT</h1>
         <p>
-          For all inquiries, please fill out the form below and we’ll be in
-          touch soon.
+          To book an event, please note that the minimum number of guests
+          required is 20. If you'd like to proceed or need more information,
+          kindly fill out the form below, and we will get back to you as soon as
+          possible. If you don’t hear from us within a reasonable time, please
+          don’t hesitate to reach out directly by phone at 78396297 or
+          21980469865. We're always happy to assist!
         </p>
         <button onClick={handleButtonClick}>Inquire Now</button>
         {showForm && (

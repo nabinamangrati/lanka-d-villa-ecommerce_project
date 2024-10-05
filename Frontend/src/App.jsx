@@ -9,6 +9,8 @@ import Footer from "../pages/Footer";
 import Booking from "../pages/Booking";
 import Room from "../pages/Room";
 import Login from "../pages/Login";
+import Signup from "../pages/Signup";
+import Admin from "../admin page/Admin";
 
 const App = () => {
   return (
@@ -24,6 +26,8 @@ const App = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/booking" element={<Booking />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
 
       <Footer />

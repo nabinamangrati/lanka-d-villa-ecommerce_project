@@ -1,31 +1,36 @@
 import { Link } from "react-router-dom";
-
+import logo from "../../images/logo.png";
 const Navigation = () => {
-  const padding = {
-    padding: 5,
-  };
-
   return (
-    <div>
-      <Link style={padding} to="/">
-        Home
-      </Link>
-      <Link style={padding} to="/about">
-        About Us
-      </Link>
-      <Link style={padding} to="/menu">
-        Menu
-      </Link>
-      <Link style={padding} to="/room">
-        Rooms
-      </Link>
-      <Link style={padding} to="/private-events">
-        Private Dinning
-      </Link>
-      <Link style={padding} to="/contact">
-        Contact
-      </Link>
-    </div>
+    <nav className="nav-bar">
+      <div className="nav-container">
+        <div className="logo">
+          <Link to="/">
+            <img src={logo} alt="resort logo" />
+          </Link>
+        </div>
+        <div className="nav-links">
+          <Link className="nav-link" to="/">
+            Home
+          </Link>
+          <Link className="nav-link" to="/about">
+            About Us
+          </Link>
+          <Link className="nav-link" to="/menu">
+            Menu
+          </Link>
+          <Link className="nav-link" to="/room">
+            Rooms
+          </Link>
+          <Link className="nav-link" to="/private-events">
+            Private Dinning
+          </Link>
+          <Link className="nav-link" to="/contact">
+            Contact
+          </Link>
+        </div>
+      </div>
+    </nav>
   );
 };
 export default Navigation;

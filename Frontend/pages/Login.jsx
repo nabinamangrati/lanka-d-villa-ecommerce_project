@@ -8,8 +8,8 @@ const Login = () => {
 
   const handleLogin = (event) => {
     event.preventDefault();
-    if (username === "test" && password === "pwd") {
-      navigate("/booking");
+    if (username === "admin" && password === "pwd") {
+      navigate("/admin");
     } else {
       alert("Invalid login. Try again.");
     }
