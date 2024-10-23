@@ -11,6 +11,7 @@ import Room from "../pages/Room";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import Admin from "../admin page/Admin";
+import Gallery from "../pages/Gallery";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/about" element={<About />} />
         <Route path="/menu" element={<Menu />} />
         <Route path="/room" element={<Room />} />
+        <Route path="/gallery" element={<Gallery />} />
 
         <Route path="/private-events" element={<PrivateEvent />} />
         <Route path="/contact" element={<Contact />} />

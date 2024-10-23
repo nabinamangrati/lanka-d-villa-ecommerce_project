@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -16,31 +16,44 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
-        <div>
-          Username:
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
+    <>
+      <form class="form">
+        <div class="flex-column">
+          <label>Email</label>
         </div>
-        <div>
-          Password:
+        <div class="inputForm">
+          <input type="text" class="input" placeholder="Enter your Email" />
+        </div>
+
+        <div class="flex-column">
+          <label>Password</label>
+        </div>
+        <div class="inputForm">
           <input
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
+            class="input"
+            placeholder="Enter your Password"
           />
         </div>
-        <button type="submit">Login</button>
+
+        <div class="flex-row">
+          <span class="span">Forgot password?</span>
+        </div>
+
+        <button class="button-submit">Sign In</button>
+
+        <p class="p">
+          Don't have an account? <span class="span">Sign Up</span>
+        </p>
+
+        <p class="p line">Or With</p>
+
+        <div class="flex-row">
+          <button class="btn google">Google</button>
+          <button class="btn apple">Apple</button>
+        </div>
       </form>
-    </div>
+    </>
   );
 };
-
 export default Login;

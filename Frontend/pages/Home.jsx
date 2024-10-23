@@ -53,10 +53,12 @@ const Home = () => {
         <h2>Private Dinning</h2>
         <div>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum
-            quaerat labore error voluptatibus itaque quo totam sint impedit
-            dignissimos animi fugit, rem, incidunt dolorem possimus aut beatae,
-            excepturi minima voluptate.
+            Discover the elegance and exclusivity of our private dining
+            experience. Whether you're planning an intimate gathering or a
+            special celebration, our luxurious settings and personalized service
+            will make your event truly unforgettable. Enjoy a tailor-made menu
+            crafted by our expert chefs, designed to suit your taste and
+            occasion.
           </p>
           <Link to="/private-events">
             <button>Learn More</button>

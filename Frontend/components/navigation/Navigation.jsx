@@ -22,6 +22,9 @@ const Navigation = () => {
           <Link className="nav-link" to="/room">
             Rooms
           </Link>
+          <Link className="nav-link" to="/gallery">
+            Gallery
+          </Link>
           <Link className="nav-link" to="/private-events">
             Private Dinning
           </Link>

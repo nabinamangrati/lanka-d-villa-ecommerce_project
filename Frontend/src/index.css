@@ -1,5 +1,5 @@
 .nav-bar {
-  background-color: rgb(185, 226, 110);
+  background-color: rgb(255, 255, 255);
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -24,4 +24,7 @@
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
   font-size: medium;
+}
+.nav-link:hover {
+  opacity: 0.7;
 }
