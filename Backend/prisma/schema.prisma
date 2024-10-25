@@ -1,0 +1,121 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum BookingStatus {
+  BOOKED
+  OCCUPIED
+  PAID
+  CANCELLED
+}
+
+// enum PaymentMethod {
+//   CASH
+//   CREDIT_CARD
+//   BANK_TRANSFER
+// }
+
+enum PaymentStatus {
+  CASH
+  ONLINE
+  REMAIN
+}
+
+enum OrderStatus {
+  RESERVED
+  PAID
+  OCCUPIED
+  CANCELLED
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  email     String    @unique
+  firstName String
+  lastName  String
+  age       Int
+  role      String
+  address   String
+  contact   String
+  Booking   Booking[]
+  Order     Order[]
+}
+
+model Menu_item {
+  id               Int            @id @default(autoincrement())
+  item_name        String
+  item_price       Int
+  menu_type        Menu_type      @relation(fields: [menuId], references: [id])
+  menuId           Int
+  availability     Boolean        @default(false)
+  item_description String
+  Order_detail     Order_detail[]
+}
+
+model Menu_type {
+  id        Int         @id @default(autoincrement())
+  type      String
+  Menu_item Menu_item[]
+}
+
+model Room {
+  id           Int       @id @default(autoincrement())
+  room_type    Room_type @relation(fields: [roomId], references: [id])
+  roomId       Int
+  number       Int
+  availability Boolean   @default(false)
+  per_day      Int
+  Booking      Booking[]
+}
+
+model Room_type {
+  id   Int    @id @default(autoincrement())
+  type String
+  Room Room[]
+}
+
+model Booking {
+  id            Int      @id @default(autoincrement())
+  user          User     @relation(fields: [userId], references: [id])
+  userId        Int
+  room          Room     @relation(fields: [roomId], references: [id])
+  roomId        Int
+  checking_date DateTime
+  checkout_date DateTime
+  status        String
+  total_price   Int
+  payment       String
+}
+
+model Order {
+  id            Int            @id @default(autoincrement())
+  user          User           @relation(fields: [userId], references: [id])
+  userId        Int
+  order_date    DateTime
+  people_number Int
+  table_number  Int
+  status        String
+  Order_detail  Order_detail[]
+}
+
+model Order_detail {
+  id           Int       @id @default(autoincrement())
+  menu_item    Menu_item @relation(fields: [menuId], references: [id])
+  menuId       Int
+  quantity     Int
+  item_price   Int
+  total_amount Int
+  order        Order     @relation(fields: [orderId], references: [id])
+  orderId      Int
+}
