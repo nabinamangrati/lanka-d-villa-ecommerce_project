@@ -1,56 +1,85 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import loginService from "../src/services/login";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
+  const [userEmail, setUserEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault();
-    if (username === "admin" && password === "pwd") {
+    try {
+      const user = {
+        email: userEmail,
+        password: password,
+      };
+      const loggedinUser = await loginService.login(user);
+      console.log(loggedinUser, "loggedinUser"); // should display in the console
       navigate("/admin");
-    } else {
+    } catch (error) {
+      console.error("Login failed", error);
       alert("Invalid login. Try again.");
     }
+  };
+  const handleGoogleLogin = () => {
+    console.log("login with google");
+  };
+  const handleAppleLogin = () => {
+    console.log("login with apple");
   };
 
   return (
     <>
-      <form class="form">
-        <div class="flex-column">
+      <form onSubmit={handleLogin} className="form">
+        <div className="flex-column">
           <label>Email</label>
         </div>
-        <div class="inputForm">
-          <input type="text" class="input" placeholder="Enter your Email" />
-        </div>
-
-        <div class="flex-column">
-          <label>Password</label>
-        </div>
-        <div class="inputForm">
+        <div className="inputForm">
           <input
-            type="password"
-            class="input"
-            placeholder="Enter your Password"
+            type="text"
+            className="input"
+            placeholder="Enter your Email"
+            value={userEmail}
+            onChange={(e) => setUserEmail(e.target.value)}
           />
         </div>
 
-        <div class="flex-row">
-          <span class="span">Forgot password?</span>
+        <div className="flex-column">
+          <label>Password</label>
+        </div>
+        <div className="inputForm">
+          <input
+            type="password"
+            className="input"
+            placeholder="Enter your Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </div>
 
-        <button class="button-submit">Sign In</button>
+        <div className="flex-row">
+          <span className="span">Forgot password?</span>
+        </div>
 
-        <p class="p">
-          Don't have an account? <span class="span">Sign Up</span>
+        <button className="button-submit">Sign In</button>
+
+        <p className="p">
+          Don't have an account?{" "}
+          <Link to="/signup" className="span">
+            Sign Up
+          </Link>
         </p>
 
-        <p class="p line">Or With</p>
+        <p className="p line">Or With</p>
 
-        <div class="flex-row">
-          <button class="btn google">Google</button>
-          <button class="btn apple">Apple</button>
+        <div className="flex-row">
+          <button className="btn google" onClick={handleGoogleLogin}>
+            Google
+          </button>
+          <button className="btn apple" onClick={handleAppleLogin}>
+            Apple
+          </button>
         </div>
       </form>
     </>
