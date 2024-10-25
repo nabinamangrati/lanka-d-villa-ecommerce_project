@@ -3,7 +3,7 @@ import facebook from "../images/facebook.png";
 import instagram from "../images/instagram.png";
 import whatsapp from "../images/whatsapp.png";
 
-import logoFooter from "../images/logo.png";
+import logoFooter from "../images/logo.jpeg";
 const Footer = () => {
   return (
     <>
