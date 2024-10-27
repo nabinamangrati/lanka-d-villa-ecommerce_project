@@ -29,3 +29,34 @@ Content-Type: application/json
     "role":"USER"
 
 }
+
+###
+POST http://localhost:3001/api/menu-type
+Content-Type: application/json
+
+{
+"userRole":"ADMIN",
+"type": "desserts"
+}
+
+###
+GET http://localhost:3001/api/menu-type
+
+###
+PUT http://localhost:3001/api/menu-type/4
+Content-Type: application/json
+
+{
+   
+    "userRole":"ADMIN",
+    "type": "hot-drinks"
+}
+
+###
+DELETE http://localhost:3001/api/menu-type/1
+Content-Type: application/json
+
+{
+    "userRole": "ADMIN"
+    
+}
