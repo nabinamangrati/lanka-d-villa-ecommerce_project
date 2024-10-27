@@ -62,35 +62,34 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3001/api/menu-items
+POST http://localhost:3001/api/room-detail
 Content-Type: application/json
 
 {
 "userRole":"ADMIN",
-"item_name": "Veg-biryani",
-"item_price": 300,
-"menuId": 2,
-"availability": true,
-"item_description": "With extra vegetables and cheese"
+"number": 204,
+"per_day": 5000,
+"roomId": 2,
+"availability": true
 }
 
 ###
-GET http://localhost:3001/api/menu-items
+GET http://localhost:3001/api/room-detail
 
 ###
 
-PUT http://localhost:3001/api/menu-items/3
+PUT http://localhost:3001/api/room-detail/6
 Content-Type: application/json
 
 {
    
     "userRole":"ADMIN",
-    "item_price": 500,
-    "item_description": "Delicious cheese pizza with extra cheese"
+    "roomId":2,
+    "availability": false
 }
 
 ###
-DELETE http://localhost:3001/api/menu-items/3
+DELETE http://localhost:3001/api/room-detail/7
 Content-Type: application/json
 
 {

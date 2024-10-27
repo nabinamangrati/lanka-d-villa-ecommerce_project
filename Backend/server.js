@@ -6,6 +6,7 @@ const loginRouter = require("./controllers/login");
 const menuTypeRouter = require("./controllers/menuType");
 const menuItemRouter = require("./controllers/menuItem");
 const roomTypeRouter = require("./controllers/roomType");
+const roomDetailRouter = require("./controllers/roomDetail");
 
 const cors = require("cors");
 app.use(cors());
@@ -17,6 +18,7 @@ app.use("/api/login", loginRouter);
 app.use("/api/menu-types", menuTypeRouter);
 app.use("/api/menu-items", menuItemRouter);
 app.use("/api/room-types", roomTypeRouter);
+app.use("/api/room-detail", roomDetailRouter);
 
 app.use(middleware.noHandler);
 app.use(middleware.unknownEndpoint);
