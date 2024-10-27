@@ -15,7 +15,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3001/api/user
+POST http://localhost:3001/api/users
 Content-Type: application/json
 
 {
@@ -31,7 +31,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3001/api/menu-type
+POST http://localhost:3001/api/menu-types
 Content-Type: application/json
 
 {
@@ -40,10 +40,10 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3001/api/menu-type
+GET http://localhost:3001/api/menu-types
 
 ###
-PUT http://localhost:3001/api/menu-type/4
+PUT http://localhost:3001/api/menu-types/4
 Content-Type: application/json
 
 {
@@ -53,7 +53,44 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3001/api/menu-type/1
+DELETE http://localhost:3001/api/menu-types/1
+Content-Type: application/json
+
+{
+    "userRole": "ADMIN"
+    
+}
+
+###
+POST http://localhost:3001/api/menu-items
+Content-Type: application/json
+
+{
+"userRole":"ADMIN",
+"item_name": "Veg-biryani",
+"item_price": 300,
+"menuId": 2,
+"availability": true,
+"item_description": "With extra vegetables and cheese"
+}
+
+###
+GET http://localhost:3001/api/menu-items
+
+###
+
+PUT http://localhost:3001/api/menu-items/3
+Content-Type: application/json
+
+{
+   
+    "userRole":"ADMIN",
+    "item_price": 500,
+    "item_description": "Delicious cheese pizza with extra cheese"
+}
+
+###
+DELETE http://localhost:3001/api/menu-items/3
 Content-Type: application/json
 
 {
