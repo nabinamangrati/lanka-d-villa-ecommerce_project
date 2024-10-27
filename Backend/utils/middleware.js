@@ -31,9 +31,19 @@ const errorHandler = (error, request, response, next) => {
   next(error);
 };
 
+const isAdmin = (req, res, next) => {
+  const { userRole } = req.body;
+
+  if (userRole !== "ADMIN") {
+    return res.status(403).json({ error: `Access denied, Admin only` });
+  }
+  next();
+};
+
 module.exports = {
   requestLogger,
   unknownEndpoint,
   noHandler,
   errorHandler,
+  isAdmin,
 };
