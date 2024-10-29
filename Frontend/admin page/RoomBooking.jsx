@@ -2,18 +2,19 @@ import React, { useState, useEffect } from "react";
 
 const RoomBookings = () => {
   const [bookings, setBookings] = useState([]);
+  const [rooms, setRooms] = useState([]);
+  const [editingBooking, setEditingBooking] = useState(null);
+  const [editingRoom, setEditingRoom] = useState(null);
+  const [updatedBooking, setUpdatedBooking] = useState({});
+  const [updatedRoom, setUpdatedRoom] = useState({});
 
   useEffect(() => {
-    // Fetch bookings data when the component loads
     fetchBookings();
+    fetchRooms();
   }, []);
 
   const fetchBookings = async () => {
-    // Fetch data from your API
-    // const response = await fetch("/api/booking");
-    // const data = await response.json();
-    // setBookings(data);
-    const mockData = [
+    const mockBookings = [
       {
         id: 1,
         customerName: "John Doe",
@@ -31,15 +32,45 @@ const RoomBookings = () => {
         status: "Pending",
       },
     ];
-    setBookings(mockData);
+    setBookings(mockBookings);
   };
 
-  const handleUpdateBooking = (bookingId) => {
-    // Logic to open a modal or form to update booking details
+  const fetchRooms = async () => {
+    const mockRooms = [
+      { id: 101, type: "Single", price: 100, availability: true },
+      { id: 102, type: "Double", price: 150, availability: false },
+    ];
+    setRooms(mockRooms);
   };
 
-  const handleCancelBooking = (bookingId) => {
-    // Logic to cancel a booking by ID
+  const handleUpdateBooking = (booking) => {
+    setEditingBooking(booking);
+    setUpdatedBooking(booking);
+  };
+
+  const handleSaveBooking = async () => {
+    const updatedBookings = bookings.map((booking) =>
+      booking.id === updatedBooking.id ? updatedBooking : booking
+    );
+    setBookings(updatedBookings);
+    setEditingBooking(null);
+  };
+
+  const handleCancelBooking = async (bookingId) => {
+    setBookings(bookings.filter((booking) => booking.id !== bookingId));
+  };
+
+  const handleUpdateRoom = (room) => {
+    setEditingRoom(room);
+    setUpdatedRoom(room);
+  };
+
+  const handleSaveRoom = async () => {
+    const updatedRooms = rooms.map((room) =>
+      room.id === updatedRoom.id ? updatedRoom : room
+    );
+    setRooms(updatedRooms);
+    setEditingRoom(null);
   };
 
   return (
@@ -67,7 +98,7 @@ const RoomBookings = () => {
               <td>{booking.checkOutDate}</td>
               <td>{booking.status}</td>
               <td>
-                <button onClick={() => handleUpdateBooking(booking.id)}>
+                <button onClick={() => handleUpdateBooking(booking)}>
                   Update
                 </button>
                 <button onClick={() => handleCancelBooking(booking.id)}>
@@ -78,6 +109,174 @@ const RoomBookings = () => {
           ))}
         </tbody>
       </table>
+
+      {editingBooking && (
+        <div className="modal">
+          <h3>Update Booking</h3>
+          <form>
+            <label>
+              Customer Name:
+              <input
+                type="text"
+                value={updatedBooking.customerName}
+                onChange={(e) =>
+                  setUpdatedBooking({
+                    ...updatedBooking,
+                    customerName: e.target.value,
+                  })
+                }
+              />
+            </label>
+            <label>
+              Room Number:
+              <input
+                type="number"
+                value={updatedBooking.roomNumber}
+                onChange={(e) =>
+                  setUpdatedBooking({
+                    ...updatedBooking,
+                    roomNumber: e.target.value,
+                  })
+                }
+              />
+            </label>
+            <label>
+              Check-In Date:
+              <input
+                type="date"
+                value={updatedBooking.checkInDate}
+                onChange={(e) =>
+                  setUpdatedBooking({
+                    ...updatedBooking,
+                    checkInDate: e.target.value,
+                  })
+                }
+              />
+            </label>
+            <label>
+              Check-Out Date:
+              <input
+                type="date"
+                value={updatedBooking.checkOutDate}
+                onChange={(e) =>
+                  setUpdatedBooking({
+                    ...updatedBooking,
+                    checkOutDate: e.target.value,
+                  })
+                }
+              />
+            </label>
+            <label>
+              Status:
+              <select
+                value={updatedBooking.status}
+                onChange={(e) =>
+                  setUpdatedBooking({
+                    ...updatedBooking,
+                    status: e.target.value,
+                  })
+                }
+              >
+                <option value="Confirmed">Confirmed</option>
+                <option value="Pending">Pending</option>
+                <option value="Cancelled">Cancelled</option>
+              </select>
+            </label>
+            <button type="button" onClick={handleSaveBooking}>
+              Save
+            </button>
+            <button type="button" onClick={() => setEditingBooking(null)}>
+              Cancel
+            </button>
+          </form>
+        </div>
+      )}
+
+      <h3>Room Management</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Room Number</th>
+            <th>Type</th>
+            <th>Price</th>
+            <th>Availability</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rooms.map((room) => (
+            <tr key={room.id}>
+              <td>{room.id}</td>
+              <td>{room.type}</td>
+              <td>{room.price}</td>
+              <td>{room.availability ? "Available" : "Not Available"}</td>
+              <td>
+                <button onClick={() => handleUpdateRoom(room)}>Update</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      {editingRoom && (
+        <div className="modal">
+          <h3>Update Room</h3>
+          <form>
+            <label>
+              Room Number:
+              <input
+                type="number"
+                value={updatedRoom.id}
+                onChange={(e) =>
+                  setUpdatedRoom({ ...updatedRoom, id: e.target.value })
+                }
+                disabled
+              />
+            </label>
+            <label>
+              Type:
+              <input
+                type="text"
+                value={updatedRoom.type}
+                onChange={(e) =>
+                  setUpdatedRoom({ ...updatedRoom, type: e.target.value })
+                }
+              />
+            </label>
+            <label>
+              Price:
+              <input
+                type="number"
+                value={updatedRoom.price}
+                onChange={(e) =>
+                  setUpdatedRoom({ ...updatedRoom, price: e.target.value })
+                }
+              />
+            </label>
+            <label>
+              Availability:
+              <select
+                value={updatedRoom.availability ? "Available" : "Not Available"}
+                onChange={(e) =>
+                  setUpdatedRoom({
+                    ...updatedRoom,
+                    availability: e.target.value === "Available",
+                  })
+                }
+              >
+                <option value="Available">Available</option>
+                <option value="Not Available">Not Available</option>
+              </select>
+            </label>
+            <button type="button" onClick={handleSaveRoom}>
+              Save
+            </button>
+            <button type="button" onClick={() => setEditingRoom(null)}>
+              Cancel
+            </button>
+          </form>
+        </div>
+      )}
     </div>
   );
 };
