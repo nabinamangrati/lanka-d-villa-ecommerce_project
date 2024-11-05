@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import userServices from "../src/services/users"
 
 const UserManagement = () => {
   const [users, setUsers] = useState([]);
@@ -10,41 +11,21 @@ const UserManagement = () => {
   }, []);
 
   const fetchUsers = async () => {
-    const mockUsers = [
-      {
-        user_id: 1,
-        user_role: "user",
-        first_name: "John",
-        last_name: "Doe",
-        address: "123 Main St",
-        user_ph: "123-456-7890",
-        user_email: "john@example.com",
-        user_age: 30,
-        status: "active",
-      },
-      {
-        user_id: 2,
-        user_role: "guest",
-        first_name: "Jane",
-        last_name: "Smith",
-        address: "456 Elm St",
-        user_ph: "987-654-3210",
-        user_email: "jane@example.com",
-        user_age: 25,
-        status: "inactive",
-      },
-    ];
-    setUsers(mockUsers);
+    console.log("hello");
+    let myAxiosPromise =await userServices.getAll();
+      setUsers(myAxiosPromise);  
   };
 
   const handleEditUserRole = (user) => {
     setEditingUser(user);
-    setUpdatedUser(user);
+    setUpdatedUser({...user});
   };
 
   const handleSaveUserRole = () => {
     const updatedUsers = users.map((user) =>
-      user.user_id === updatedUser.user_id ? updatedUser : user
+      // user.id === updatedUser.id ? updatedUser : user
+    user.id === updatedUser.id ? { ...user, role: updatedUser.role } : user
+
     );
     setUsers(updatedUsers);
     setEditingUser(null);
@@ -52,12 +33,13 @@ const UserManagement = () => {
 
   const handleToggleUserStatus = (userId) => {
     const updatedUsers = users.map((user) =>
-      user.user_id === userId
+      user.id === userId
         ? { ...user, status: user.status === "active" ? "inactive" : "active" }
         : user
     );
     setUsers(updatedUsers);
   };
+  
 
   return (
     <div>
@@ -79,19 +61,19 @@ const UserManagement = () => {
         </thead>
         <tbody>
           {users.map((user) => (
-            <tr key={user.user_id}>
-              <td>{user.user_id}</td>
+            <tr key={user.id}>
+              <td>{user.id}</td>
               <td>{user.first_name}</td>
               <td>{user.last_name}</td>
               <td>{user.address}</td>
-              <td>{user.user_ph}</td>
-              <td>{user.user_email}</td>
-              <td>{user.user_age}</td>
-              <td>{user.user_role}</td>
+              <td>{user.phone}</td>
+              <td>{user.email}</td>
+              <td>{user.age}</td>
+              <td>{user.role}</td>
               <td>{user.status}</td>
               <td>
                 <button onClick={() => handleEditUserRole(user)}>Edit Role</button>
-                <button onClick={() => handleToggleUserStatus(user.user_id)}>
+                <button onClick={() => handleToggleUserStatus(user.id)}>
                   {user.status === "active" ? "Disable" : "Enable"}
                 </button>
               </td>
@@ -107,9 +89,9 @@ const UserManagement = () => {
             <label>
               Role:
               <select
-                value={updatedUser.user_role}
+                value={updatedUser.role}
                 onChange={(e) =>
-                  setUpdatedUser({ ...updatedUser, user_role: e.target.value })
+                  setUpdatedUser({ ...updatedUser, role: e.target.value })
                 }
               >
                 <option value="admin">Admin</option>

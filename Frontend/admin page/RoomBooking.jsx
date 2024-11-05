@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import bookingServices from "../src/services/bookings";
+import roomServices from "../src/services/rooms"
 
 const RoomBookings = () => {
   const [bookings, setBookings] = useState([]);
@@ -14,58 +16,42 @@ const RoomBookings = () => {
   }, []);
 
   const fetchBookings = async () => {
-    const mockBookings = [
-      {
-        booking_id: 1,
-        checkin_date: "2024-10-30",
-        checkout_date: "2024-11-02",
-        status: "Confirmed",
-        total_price: 300,
-        payment: "Paid",
-        user_id: 1,
-        room_id: 101,
-        remark: "No special requests",
-      },
-      {
-        booking_id: 2,
-        checkin_date: "2024-11-05",
-        checkout_date: "2024-11-07",
-        status: "Pending",
-        total_price: 200,
-        payment: "Pending",
-        user_id: 2,
-        room_id: 102,
-        remark: "Late check-in",
-      },
-    ];
-    setBookings(mockBookings);
+    try {
+      const response = await bookingServices.getBookings();
+      console.log("Fetched bookings:", response); 
+      setBookings(response);
+    } catch (error) {
+      console.error("Error fetching bookings:", error);
+    }
   };
 
   const fetchRooms = async () => {
-    const mockRooms = [
-      { id: 101, type: "Single", price: 100, availability: true },
-      { id: 102, type: "Double", price: 150, availability: false },
-      { id: 103, type: "Suite", price: 200, availability: true },
-      { id: 104, type: "Single", price: 100, availability: true },
-      { id: 105, type: "Double", price: 150, availability: false },
-      { id: 106, type: "Suite", price: 200, availability: true },
-      { id: 107, type: "Single", price: 100, availability: true },
-      { id: 108, type: "Double", price: 150, availability: false },
-    ];
-    setRooms(mockRooms);
+   
+    try {
+      const response = await roomServices.getRooms();
+      console.log("Fetched rooms:", response); 
+      setRooms(response);
+    } catch (error) {
+      console.error("Error fetching rooms:", error);
+    }
   };
 
   const handleUpdateBooking = (booking) => {
     setEditingBooking(booking);
-    setUpdatedBooking(booking);
+    setUpdatedBooking({ ...booking });
   };
 
   const handleSaveBooking = async () => {
-    const updatedBookings = bookings.map((booking) =>
-      booking.booking_id === updatedBooking.booking_id ? updatedBooking : booking
-    );
-    setBookings(updatedBookings);
-    setEditingBooking(null);
+    try {
+      await bookingServices.updateBooking(updatedBooking.id, updatedBooking);
+      const updatedBookings = bookings.map((booking) =>
+        booking.id === updatedBooking.id ? updatedBooking : booking
+      );
+      setBookings(updatedBookings);
+      setEditingBooking(null);
+    } catch (error) {
+      console.error("Error updating booking:", error);
+    }
   };
 
   const handleCancelBooking = async (bookingId) => {
@@ -99,22 +85,20 @@ const RoomBookings = () => {
             <th>Payment</th>
             <th>User ID</th>
             <th>Room ID</th>
-            <th>Remark</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {bookings.map((booking) => (
             <tr key={booking.booking_id}>
-              <td>{booking.booking_id}</td>
-              <td>{booking.checkin_date}</td>
-              <td>{booking.checkout_date}</td>
+              <td>{booking.id}</td>
+              <td>{booking.check_in}</td>
+              <td>{booking.check_out}</td>
               <td>{booking.status}</td>
               <td>{booking.total_price}</td>
-              <td>{booking.payment}</td>
+              <td>{booking.payment_status}</td>
               <td>{booking.user_id}</td>
               <td>{booking.room_id}</td>
-              <td>{booking.remark}</td>
               <td>
                 <button onClick={() => handleUpdateBooking(booking)}>
                   Update
@@ -136,11 +120,11 @@ const RoomBookings = () => {
               Check-In Date:
               <input
                 type="date"
-                value={updatedBooking.checkin_date}
+                value={updatedBooking.check_in}
                 onChange={(e) =>
                   setUpdatedBooking({
                     ...updatedBooking,
-                    checkin_date: e.target.value,
+                    check_in: e.target.value,
                   })
                 }
               />
@@ -149,11 +133,11 @@ const RoomBookings = () => {
               Check-Out Date:
               <input
                 type="date"
-                value={updatedBooking.checkout_date}
+                value={updatedBooking.check_out}
                 onChange={(e) =>
                   setUpdatedBooking({
                     ...updatedBooking,
-                    checkout_date: e.target.value,
+                    check_out: e.target.value,
                   })
                 }
               />
@@ -189,16 +173,18 @@ const RoomBookings = () => {
             </label>
             <label>
               Payment:
-              <input
-                type="text"
-                value={updatedBooking.payment}
+              <select
+                value={updatedBooking.payment_status}
                 onChange={(e) =>
                   setUpdatedBooking({
                     ...updatedBooking,
-                    payment: e.target.value,
+                    payment_status: e.target.value,
                   })
                 }
-              />
+              >
+                <option value="Paid">Paid</option>
+                <option value="Unpaid">Unpaid</option>
+              </select>
             </label>
             <label>
               User ID:
@@ -226,7 +212,6 @@ const RoomBookings = () => {
                 }
               />
             </label>
-           
             <button type="button" onClick={handleSaveBooking}>
               Save
             </button>

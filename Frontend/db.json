@@ -1,0 +1,116 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "first_name": "Arto",
+      "last_name": "Hellas",
+      "address": "Vallikatu 1",
+      "phone": "040-123456",
+      "email": "arto@gmail.com",
+      "age": 30,
+      "role": "admin",
+      "status": "active"
+    },
+    {
+      "id": "2",
+      "first_name": "nabina",
+      "last_name": "mangrati",
+      "address": "ktm 1",
+      "phone": "040-1285743",
+      "email": "nabina@gmail.com",
+      "age": 30,
+      "role": "user",
+      "status": "active"
+    },
+    {
+      "id": "3",
+      "first_name": "ram",
+      "last_name": "rokka",
+      "address": "lalitpur 1",
+      "phone": "040-343445",
+      "email": "ram@gmail.com",
+      "age": 25,
+      "role": "guest",
+      "status": "inactive"
+    },
+    {
+      "id": "4",
+      "first_name": "sita",
+      "last_name": "sita",
+      "address": "bkt 1",
+      "phone": "040-123423",
+      "email": "sita@gmail.com",
+      "age": 20,
+      "role": "user",
+      "status": "active"
+    }
+  ],
+  "bookings": [
+    {
+      "id": "1",
+      "user_id": 1,
+      "room_id": 1,
+      "check_in": "2021-01-01",
+      "check_out": "2021-01-05",
+      "status": "Pending",
+      "total_price": "1995",
+      "payment_status": "Paid"
+    },
+    {
+      "id": "2",
+      "user_id": 2,
+      "room_id": 2,
+      "check_in": "2021-01-01",
+      "check_out": "2021-01-05",
+      "status": "pending",
+      "total_price": "1006",
+      "payment_status": "paid"
+    },
+    {
+      "id": "3",
+      "user_id": 3,
+      "room_id": 3,
+      "check_in": "2021-01-01",
+      "check_out": "2021-01-05",
+      "status": "cancelled",
+      "total_price": 2600,
+      "payment_status": "unpaid"
+    },
+    {
+      "id": "4",
+      "user_id": 4,
+      "room_id": 4,
+      "check_in": "2021-05-05",
+      "check_out": "2021-05-07",
+      "status": "confirmed",
+      "total_price": 3500,
+      "payment_status": "unpaid"
+    }
+  ],
+  "rooms": [
+    {
+      "id": "1",
+      "type": "Single",
+      "price": "399",
+      "status": "unavailable"
+    },
+    {
+      "id": "2",
+      "type": "Double",
+      "price": "499",
+      "status": "available"
+    },
+    {
+      "id": "3",
+      "type": "Triple",
+      "price": "650",
+      "status": "available"
+    },
+    {
+      "id": "4",
+      "type": "Quad",
+      "price": "800",
+      "availability": "available"
+    }
+  ]
+}

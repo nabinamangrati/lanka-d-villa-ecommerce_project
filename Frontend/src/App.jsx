@@ -12,6 +12,7 @@ import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import Admin from "../admin page/Admin";
 import Gallery from "../pages/Gallery";
+import RoomDetails from "../pages/RoomDetails";
 
 const App = () => {
   return (
@@ -30,6 +31,8 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/room/:id" element={<RoomDetails />} />
+
       </Routes>
 
       <Footer />
