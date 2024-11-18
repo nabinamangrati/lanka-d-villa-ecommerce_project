@@ -89,28 +89,90 @@
   ],
   "rooms": [
     {
-      "id": "1",
-      "type": "Single",
-      "price": "399",
+      "id": "101",
+      "type": "group",
+      "price_person":2000,
+      "room_only":"-",
+      "price_with_BF":"-",
       "status": "unavailable"
     },
     {
+     "id": "102",
+      "type": "group",
+      "price_person":2000,
+      "room_only":"-",
+      "price_with_BF":"-",
+      "status": "unavailable"
+    },
+    {
+     "id": "103",
+      "type": "group",
+      "price_person":2000,
+      "room_only":"-",
+      "price_with_BF":"-",
+      "status": "available"
+    },
+    {
+     "id": "104",
+      "type": "couple",
+       "price_person":"-",
+      "room_only":"2500",      
+      "price_with_BF": "4200",
+      "status": "unavailable"
+    },
+    {
+      "id": "105",
+       "type": "couple",
+      "price_person":"-",
+      "room_only":"2500",
+       "price_with_BF": "4200",
+ 
+       "status": "available"
+     },
+     {
+      "id": "106",
+       "type": "couple",
+      "price_person":"-",
+      "room_only":"2500",
+       "price_with_BF": "4500",
+ 
+       "status": "unavailable"
+     },
+     {
+      "id": "107",
+       "type": "couple",
+       "price_person":"-",
+      "room_only":"2500",
+       "price_with_BF": "4500",
+ 
+       "status": "available"
+     }
+
+  ],
+  "menu": [
+    {
+      "id": "1",
+      "name": "Chicken Biryani",
+      "price": "200",
+      "status": "available"
+    },
+    {
       "id": "2",
-      "type": "Double",
-      "price": "499",
+      "name": "Mutton Biryani",
+      "price": "250",
       "status": "available"
     },
     {
       "id": "3",
-      "type": "Triple",
-      "price": "650",
+      "name": "Veg Biryani",
+      "price": "150",
       "status": "available"
     },
     {
       "id": "4",
-      "type": "Quad",
-      "price": "800",
-      "availability": "available"
+      "name": "Paneer Biryani",
+      "price": "180",
+      "status": "available"
     }
   ]
 }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import roomServices from "../src/services/rooms"
 
 const RoomDetail = () => {
   const { id } = useParams(); // Get room ID from the URL
@@ -10,14 +11,14 @@ const RoomDetail = () => {
   }, [id]);
 
   const fetchRoomDetails = async (roomId) => {
-    // Mock data for room details
-    const mockRoomData = {
-      1: { room_id: 1, type: "Single", room_no: 101, availability: true, price: 100 },
-      2: { room_id: 2, type: "Double", room_no: 102, availability: false, price: 150 },
-      // add more mock data if needed
-    };
-    setRoom(mockRoomData[roomId]);
-  };
+    try {
+      const response = await roomServices.getRoomById(roomId);
+      console.log("Fetched room details:", response);
+      setRoom(response);
+    } catch (error) {
+      console.error("Error fetching room details:", error);
+    }
+  }
 
   if (!room) return <p>Loading...</p>;
 
@@ -25,7 +26,6 @@ const RoomDetail = () => {
     <div>
       <h2>Room {room.room_no} Details</h2>
       <p>Type: {room.type}</p>
-      <p>Availability: {room.availability ? "Available" : "Unavailable"}</p>
       <p>Price per night: ${room.price}</p>
       {/* You can add more details as needed */}
     </div>

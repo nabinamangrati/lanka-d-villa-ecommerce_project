@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = "/api/menu";
+const baseUrl = "http://localhost:3001/menu";
 
 const getMenuItems = async () => {
   try {
