@@ -29,9 +29,7 @@ export default function Login() {
     console.log("login with google");
   };
 
-  const handleAppleLogin = () => {
-    console.log("login with apple");
-  };
+  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -99,7 +97,7 @@ export default function Login() {
             </div>
           </div>
 
-          <div className="mt-6 grid grid-cols-2 gap-3">
+          <div className="flex justify-center">
             <div>
               <button
                 onClick={handleGoogleLogin}
@@ -108,14 +106,7 @@ export default function Login() {
                 Google
               </button>
             </div>
-            <div>
-              <button
-                onClick={handleAppleLogin}
-                className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
-              >
-                Apple
-              </button>
-            </div>
+            
           </div>
         </div>
 

@@ -1,9 +1,10 @@
-'use client'
+'use client';
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 export default function PrivateEvent() {
   const [showForm, setShowForm] = useState(false);
+  const formRef = useRef(null);
 
   const handleButtonClick = () => {
     setShowForm(true);
@@ -18,6 +19,23 @@ export default function PrivateEvent() {
     alert("Your inquiry has been submitted!");
     setShowForm(false);
   };
+
+  // Close form when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (formRef.current && !formRef.current.contains(event.target)) {
+        setShowForm(false);
+      }
+    };
+
+    if (showForm) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showForm]);
 
   return (
     <div className="container mx-auto px-4 py-8 text-center max-w-2xl">
@@ -42,19 +60,22 @@ export default function PrivateEvent() {
 
       {showForm && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg p-8 max-w-md w-full max-h-[90vh] overflow-y-auto">
+          <div 
+            ref={formRef} 
+            className="bg-white rounded-lg p-8 max-w-md w-full max-h-[90vh] overflow-y-auto"
+          >
             <h2 className="text-2xl font-bold mb-4 text-green-700">Event Inquiry Form</h2>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
+                <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name *</label>
                 <input type="text" id="name" required className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50" />
               </div>
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email *</label>
                 <input type="email" id="email" required className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50" />
               </div>
               <div>
-                <label htmlFor="phone" className="block text-sm font-medium text-gray-700">Phone Number</label>
+                <label htmlFor="phone" className="block text-sm font-medium text-gray-700">Phone Number *</label>
                 <input type="tel" id="phone" required className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50" />
               </div>
               <div>
@@ -65,13 +86,13 @@ export default function PrivateEvent() {
                   required 
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50"
                 >
-                  <option value="">Select Event Type</option>
-                  <option value="wedding">Wedding</option>
-                  <option value="birthday">Birthday</option>
-                  <option value="corporate">Corporate Event</option>
-                  <option value="private-dinner">Private Dinner</option>
-                  <option value="anniversary">Anniversary</option>
-                  <option value="others">Others</option>
+                  <option value="" className="text-gray-500">Select Event Type</option>
+                  <option value="wedding" className="text-gray-900">Wedding</option>
+                  <option value="birthday" className="text-gray-900">Birthday</option>
+                  <option value="corporate" className="text-gray-900">Corporate Event</option>
+                  <option value="private-dinner" className="text-gray-900">Private Dinner</option>
+                  <option value="anniversary" className="text-gray-900">Anniversary</option>
+                  <option value="others" className="text-gray-900">Others</option>
                 </select>
               </div>
               <div>
